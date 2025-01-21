@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# vm_check.sh
+# vm-check.sh
 # Author: Transfairs
 # Date: 21st Jan 2025
 # Description: This script checks whether the current system is running inside a virtual machine.
