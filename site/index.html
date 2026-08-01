@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>vm-check: is this machine real or virtual?</title>
+<meta name="description" content="vm-check detects whether a system is running inside a virtual machine using a weighted set of OS-level heuristics. CLI and cross-platform GUI for Linux and Windows.">
+<link rel="icon" href="assets/icon.png">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/site.js"></script>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="#top">
+      <img src="assets/icon.png" alt="">
+      vm-check
+    </a>
+    <nav class="nav-links">
+      <span class="nav-page-links">
+        <a href="#download">Download</a>
+        <a href="#checks">Checks</a>
+        <a href="#screenshots">Screenshots</a>
+        <a href="#install">Install</a>
+        <a href="#usage">Usage</a>
+        <a href="changelog.html">Changelog</a>
+        <a href="https://github.com/transfairs/vm-check">GitHub</a>
+      </span>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle color theme">💻 System</button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero wrap">
+    <img class="logo" src="assets/icon.png" alt="vm-check logo">
+    <h1>Is this machine real, or a VM?</h1>
+    <p class="lead">
+      vm-check answers that question from a weighted set of OS-level
+      heuristics (CPU flags, DMI/BIOS strings, MAC and disk signatures,
+      kernel modules and guest tools) and gives you a confidence score
+      instead of a guess. Command line or GUI, Linux or Windows.
+    </p>
+    <div class="badges">
+      <a href="https://github.com/transfairs/vm-check/actions/workflows/ci.yml"><img src="https://github.com/transfairs/vm-check/actions/workflows/ci.yml/badge.svg" alt="CI status"></a>
+      <a href="https://github.com/transfairs/vm-check/releases"><img src="https://img.shields.io/github/v/release/transfairs/vm-check?label=release&color=2f93b0" alt="Latest release"></a>
+      <a href="https://github.com/transfairs/vm-check/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0--or--later-2f93b0" alt="License"></a>
+      <img src="https://img.shields.io/badge/Rust-000000?style=flat&logo=rust&logoColor=white" alt="Rust">
+      <img src="https://img.shields.io/badge/GUI-egui-2f93b0" alt="egui">
+      <img src="https://img.shields.io/badge/Linux-FCC624?style=flat&logo=linux&logoColor=black" alt="Linux">
+      <img src="https://img.shields.io/badge/Windows-0078D6?style=flat&logo=windows&logoColor=white" alt="Windows">
+    </div>
+    <div class="cta">
+      <a class="btn btn-primary" href="#download">Download latest release</a>
+      <a class="btn btn-secondary" href="https://github.com/transfairs/vm-check">View source on GitHub</a>
+    </div>
+  </section>
+
+  <section class="wrap" id="download">
+    <h2 class="section-title">Download <span class="version-badge" id="version-badge" data-version hidden></span></h2>
+    <p class="section-lead">
+      Ready-to-run archives, always pointing at the latest
+      <a href="https://github.com/transfairs/vm-check/releases">release</a>.
+      Each archive contains both the CLI (<code>vm-check</code>) and the GUI
+      (<code>vm-check-gui</code>) binary: extract and run, no installer.
+    </p>
+    <div class="grid2 downloads">
+      <a class="card os-card" href="https://github.com/transfairs/vm-check/releases/latest/download/vm-check-linux-x86_64.tar.gz">
+        <div class="os-head">
+          <div class="os-icon">
+            <svg viewBox="0 0 48 48" aria-hidden="true">
+              <ellipse cx="17" cy="43" rx="6.5" ry="2.6" fill="currentColor"/>
+              <ellipse cx="31" cy="43" rx="6.5" ry="2.6" fill="currentColor"/>
+              <path d="M24 4c-7 0-11 6-11 14 0 6 1 10 2 14 1 4 3 8 9 8s8-4 9-8c1-4 2-8 2-14 0-8-4-14-11-14z" fill="currentColor"/>
+              <path d="M24 13c-3.6 0-5.7 3-5.7 8.2 0 4 .6 7.2 1.6 10.3 1 3 2.1 5 4.1 5s3.1-2 4.1-5c1-3.1 1.6-6.3 1.6-10.3 0-5.2-2.1-8.2-5.7-8.2z" fill="var(--bg-elevated)"/>
+              <circle cx="20.3" cy="12" r="1.7" fill="var(--bg-elevated)"/>
+              <circle cx="27.7" cy="12" r="1.7" fill="var(--bg-elevated)"/>
+              <circle cx="20.7" cy="12.4" r="0.75" fill="currentColor"/>
+              <circle cx="28.1" cy="12.4" r="0.75" fill="currentColor"/>
+              <path d="M22.4 15.8h3.2l-1.6 2.4z" fill="#e2a23e"/>
+            </svg>
+          </div>
+          <div class="os-text">
+            <h3>Linux</h3>
+            <p class="os-sub">x86_64 &middot; <code>tar.gz</code></p>
+          </div>
+        </div>
+        <span class="btn btn-primary os-btn">Download for Linux</span>
+      </a>
+      <a class="card os-card" href="https://github.com/transfairs/vm-check/releases/latest/download/vm-check-windows-x86_64.zip">
+        <div class="os-head">
+          <div class="os-icon">
+            <svg viewBox="0 0 48 48" aria-hidden="true">
+              <rect x="4" y="4" width="18" height="18" rx="3" fill="currentColor"/>
+              <rect x="26" y="4" width="18" height="18" rx="3" fill="currentColor" opacity="0.7"/>
+              <rect x="4" y="26" width="18" height="18" rx="3" fill="currentColor" opacity="0.7"/>
+              <rect x="26" y="26" width="18" height="18" rx="3" fill="currentColor"/>
+            </svg>
+          </div>
+          <div class="os-text">
+            <h3>Windows</h3>
+            <p class="os-sub">x86_64 &middot; <code>zip</code></p>
+          </div>
+        </div>
+        <span class="btn btn-primary os-btn">Download for Windows</span>
+      </a>
+    </div>
+    <p class="download-note">
+      Building for another platform, or want to verify what you're running?
+      See <a href="#install">building from source</a>. All past versions are
+      on the <a href="https://github.com/transfairs/vm-check/releases">releases page</a>.
+    </p>
+  </section>
+
+  <section class="wrap">
+    <h2 class="section-title">Why it's not just a yes/no check</h2>
+    <p class="section-lead">
+      Any single signal (a MAC vendor prefix, a BIOS string) can be wrong.
+      vm-check runs every applicable heuristic for the host platform, weighs
+      the results, and only commits to a verdict once the evidence is
+      one-sided.
+    </p>
+    <div class="grid3">
+      <div class="card">
+        <div class="icon">&#8721;</div>
+        <h3>Weighted, not binary</h3>
+        <p>Each heuristic contributes a weighted signal. Skipped or inconclusive
+        checks are excluded from scoring entirely, rather than diluting the
+        result either way.</p>
+      </div>
+      <div class="card">
+        <div class="icon">&#9881;</div>
+        <h3>Cross-platform</h3>
+        <p>The same detection engine (<code>vm-check-core</code>) backs a
+        command-line tool and a native desktop GUI, on both Linux and
+        Windows.</p>
+      </div>
+      <div class="card">
+        <div class="icon">&#128274;</div>
+        <h3>Low privilege by default</h3>
+        <p>Only two Linux checks ever need <code>sudo</code>. Every Windows
+        check (WMI, registry) runs as a normal user. No check needs
+        Administrator/UAC elevation on Windows, ever.</p>
+      </div>
+    </div>
+
+    <div class="meter-wrap">
+      <div class="meter-labels">
+        <span><strong>Likely physical</strong></span>
+        <span><strong>Uncertain</strong></span>
+        <span><strong>Likely virtual machine</strong></span>
+      </div>
+      <div class="meter-track">
+        <span class="mark" style="left:15%">15%</span>
+        <span class="mark" style="left:66%">66%</span>
+      </div>
+      <div class="meter-labels">
+        <span>confidence &le; 15%</span>
+        <span>between the thresholds</span>
+        <span>confidence &ge; 66%</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="checks">
+    <h2 class="section-title">What it actually checks</h2>
+    <p class="section-lead">
+      Ten heuristics on Linux, six on Windows, run in this order, each with
+      its own weight in the final score. Names match exactly what the CLI
+      and GUI report.
+    </p>
+    <div class="checks-cols">
+      <div>
+        <h3>Linux</h3>
+        <ul class="check-list">
+          <li><span class="dot"></span> <code>systemd-detect-virt</code></li>
+          <li><span class="dot"></span> CPU hypervisor flag in <code>/proc/cpuinfo</code></li>
+          <li><span class="dot"></span> Hypervisor vendor strings in <code>/proc/cpuinfo</code></li>
+          <li><span class="dot"></span> Hypervisor MAC address prefix</li>
+          <li><span class="dot"></span> Hypervisor disk model signature</li>
+          <li><span class="dot"></span> System manufacturer (<code>dmidecode</code>)<span class="needs-root">may need sudo</span></li>
+          <li><span class="dot"></span> BIOS vendor (<code>dmidecode</code>)<span class="needs-root">may need sudo</span></li>
+          <li><span class="dot"></span> Hypervisor guest kernel modules</li>
+          <li><span class="dot"></span> VirtualBox/VMware guest tools installed (<code>dpkg</code>)</li>
+          <li><span class="dot"></span> Hypervisor modules in <code>dmesg</code><span class="needs-root">needs sudo</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Windows</h3>
+        <ul class="check-list">
+          <li><span class="dot"></span> Computer system manufacturer/model (WMI)</li>
+          <li><span class="dot"></span> BIOS manufacturer/version (WMI)</li>
+          <li><span class="dot"></span> Hypervisor MAC address prefix</li>
+          <li><span class="dot"></span> Hypervisor disk model signature</li>
+          <li><span class="dot"></span> BIOS strings (registry)</li>
+          <li><span class="dot"></span> SCSI disk enumeration (registry)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="screenshots">
+    <h2 class="section-title">Screenshots</h2>
+    <p class="section-lead">
+      The same weighted report, from the terminal and the desktop GUI, on
+      a physical Linux host and inside an actual Windows VM guest.
+    </p>
+
+    <h3 class="shots-heading">CLI</h3>
+    <div class="shots">
+      <figure class="shot">
+        <img src="assets/linux-host-cli.png" alt="vm-check CLI output on a physical Linux host: every check PASSes, verdict NOT running in a virtual machine, 0% VM likelihood" loading="lazy">
+        <figcaption><strong>Physical Linux host.</strong> Every check passes: 0% VM likelihood.</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="assets/windows-guest-cli.png" alt="vm-check CLI output inside a Windows VM guest: every check FAILs, verdict running in a virtual machine, 100% VM likelihood" loading="lazy">
+        <figcaption><strong>Windows VM guest.</strong> Every check fails: 100% VM likelihood.</figcaption>
+      </figure>
+    </div>
+
+    <h3 class="shots-heading">GUI</h3>
+    <div class="shots shots-3">
+      <figure class="shot">
+        <img src="assets/linux-host-gui.png" alt="vm-check GUI in light theme on a physical Linux host, all checks pass" loading="lazy">
+        <figcaption><strong>Light theme.</strong> Physical Linux host.</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="assets/darkmode.png" alt="vm-check GUI in dark theme on a physical Linux host, all checks pass" loading="lazy">
+        <figcaption><strong>Dark theme.</strong> Same host; theme follows Light/Dark/System, just like this page's.</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="assets/windows-guest-gui.png" alt="vm-check GUI on a Windows VM guest, all checks fail" loading="lazy">
+        <figcaption><strong>Windows VM guest.</strong> Every check fails.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="wrap" id="install">
+    <h2 class="section-title">Building from source</h2>
+    <p class="section-lead">
+      Prefer not to run pre-built binaries, or need another target? All you
+      need is a stable <a href="https://rustup.rs">Rust toolchain</a>.
+    </p>
+    <pre class="code">cargo build --release --workspace</pre>
+    <p class="download-note">
+      Binaries land at <code>target/release/vm-check</code> and
+      <code>target/release/vm-check-gui</code> (<code>.exe</code> on
+      Windows). Building <code>vm-check-gui</code> on Linux additionally
+      needs a few GTK/X11 development packages; see the
+      <a href="https://github.com/transfairs/vm-check#dependencies">README</a>.
+    </p>
+  </section>
+
+  <section class="wrap" id="usage">
+    <h2 class="section-title">Usage</h2>
+    <div class="two-col">
+      <div>
+        <p class="code-label">CLI</p>
+        <pre class="code">vm-check                <span class="c"># run all checks</span>
+vm-check --no-elevate    <span class="c"># skip checks needing root/sudo</span>
+vm-check -y              <span class="c"># don't prompt, run elevated checks</span>
+vm-check --json          <span class="c"># machine-readable output</span>
+vm-check -v               <span class="c"># show matched strings / skip reasons</span></pre>
+        <table class="flags">
+          <tr><th>Exit code</th><th>Meaning</th></tr>
+          <tr><td><code>0</code></td><td>Likely physical</td></tr>
+          <tr><td><code>1</code></td><td>Likely a virtual machine</td></tr>
+          <tr><td><code>2</code></td><td>Uncertain</td></tr>
+          <tr><td><code>3</code></td><td>Internal error</td></tr>
+        </table>
+      </div>
+      <div>
+        <p class="code-label">GUI</p>
+        <p style="color:var(--text-muted); font-size:0.94rem; margin-top:0;">
+          Run <code>vm-check-gui</code> and click <strong>Run checks</strong>.
+          Elevated checks are opt-in via a checkbox, since a windowed app
+          can't show an interactive terminal <code>sudo</code> prompt, launch
+          the whole GUI as root (<code>sudo vm-check-gui</code>) to include
+          them. On Windows, just run it: no elevation is ever needed.
+        </p>
+        <p style="color:var(--text-muted); font-size:0.94rem;">
+          Built with <a href="https://github.com/emilk/egui">egui</a>,
+          available in English and German, with persisted theme and
+          language preferences.
+        </p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div>vm-check is free software, licensed <a href="https://github.com/transfairs/vm-check/blob/main/LICENSE">GPL-3.0-or-later</a>.</div>
+    <div class="foot-links">
+      <a href="https://github.com/transfairs/vm-check">Source</a>
+      <a href="https://github.com/transfairs/vm-check/releases">Releases</a>
+      <a href="changelog.html">Changelog</a>
+      <a href="https://github.com/transfairs/vm-check/issues">Issues</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

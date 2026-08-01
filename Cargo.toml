@@ -1,0 +1,14 @@
+[workspace]
+members = ["vm-check-core", "vm-check-cli", "vm-check-gui"]
+resolver = "2"
+
+[workspace.package]
+version = "1.0.0"
+edition = "2021"
+license = "GPL-3.0-or-later"
+repository = "https://github.com/transfairs/vm-check"
+
+[workspace.dependencies]
+vm-check-core = { path = "vm-check-core" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"

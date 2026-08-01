@@ -1,0 +1,25 @@
+[package]
+name = "vm-check-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Command-line interface for vm-check."
+
+[[bin]]
+name = "vm-check"
+path = "src/main.rs"
+
+[dependencies]
+vm-check-core.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+clap = { version = "4", features = ["derive"] }
+owo-colors = { version = "4", features = ["supports-colors"] }
+
+# Not target-gated: build.rs itself always compiles for the host, so this
+# must be resolvable regardless of host OS. It's a no-op unless the actual
+# build *target* (checked at build.rs runtime, not via Cargo.toml gating) is
+# Windows, see build.rs.
+[build-dependencies]
+winresource = "0.1"

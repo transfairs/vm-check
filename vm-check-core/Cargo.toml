@@ -1,0 +1,20 @@
+[package]
+name = "vm-check-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Detection engine for vm-check: heuristics that determine whether the host is running inside a virtual machine."
+
+[dependencies]
+serde.workspace = true
+
+[target.'cfg(target_os = "windows")'.dependencies]
+wmi = "0.14"
+winreg = "0.52"
+anyhow = "1"
+
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
+
+[dev-dependencies]

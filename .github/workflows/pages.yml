@@ -1,0 +1,57 @@
+name: Deploy Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - "CHANGELOG.md"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Render changelog into site/changelog.html
+        run: |
+          npx --yes marked -i CHANGELOG.md -o /tmp/changelog-rendered.html
+          python3 - <<'PY'
+          import re
+          rendered = open("/tmp/changelog-rendered.html").read()
+          page = open("site/changelog.html").read()
+          replacement = "<!-- CHANGELOG:START -->\n" + rendered + "<!-- CHANGELOG:END -->"
+          page = re.sub(
+              r"<!-- CHANGELOG:START -->.*<!-- CHANGELOG:END -->",
+              lambda _: replacement,
+              page,
+              flags=re.DOTALL,
+          )
+          open("site/changelog.html", "w").write(page)
+          PY
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
